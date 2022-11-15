@@ -1,0 +1,12 @@
+.fr{
+		float: right;
+}
+
+.fl{
+	float: left;
+}
+.table_font{
+	font-size: 15px;
+	font-weight: 600;
+	font-family: '楷书';
+}
