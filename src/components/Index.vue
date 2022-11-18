@@ -3,29 +3,34 @@
 	<div id="index">
 		<div id="header">
 			<ul>
-				<li class="fl table_font margin_left">首页</li>
-				<li class="fl table_font margin_left">小视频</li>
-				<li class="fr table_font margin_right">个人中心</li>
+				<li class="fl table_font margin_left">
+					<router-link to="/index" active-class="active-class">首页</router-link>
+				</li>
+				<li class="fl table_font margin_left">
+					<router-link to="/life" active-class="active-class">小视频</router-link>
+				</li>
+				<li class="fl table_font margin_left">
+					<router-link to="/comic" active-class="active-class">动漫</router-link>
+				</li>
+				<li class="fr table_font margin_right">
+					<router-link to="/user" active-class="active-class">个人中心</router-link>
+				</li>
+				<li class="fr table_font margin_left">
+					<router-link to="/creation" active-class="active-class">创作中心</router-link>
+				</li>
 			</ul>
 		</div>
-		<div style="width: 70%; margin: 0 auto;">
-			<Box></Box>
-		</div>
-		<span style="height: 50px;display: block;">视频列表</span>
-		<VideoBox></VideoBox>
+		
+		<router-view></router-view>
 	</div>
 </template>
 
 <script>
-	import Box from './templates/RunnerBox.vue'
-	import VideoBox from './templates/VideoBox.vue'
 	export default{
 		data() {
 			
 		},
-		components: {
-			Box,VideoBox
-		}
+		
 		
 	}
 </script>

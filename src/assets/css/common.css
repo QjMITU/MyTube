@@ -1,7 +1,10 @@
 .fr{
 		float: right;
 }
-
+.active-class{
+	background-color: aqua;
+	color: black;
+}
 .fl{
 	float: left;
 }
@@ -9,4 +12,7 @@
 	font-size: 15px;
 	font-weight: 600;
 	font-family: '楷书';
+}
+.base-container{
+	width: 100%;
 }
