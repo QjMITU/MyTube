@@ -1,6 +1,5 @@
 <!-- 首页页面 -->
 <template>
-	<div id="index">
 		<div id="header">
 			<ul>
 				<li class="fl table_font margin_left">
@@ -20,16 +19,11 @@
 				</li>
 			</ul>
 		</div>
-		
-		<router-view></router-view>
-	</div>
 </template>
 
 <script>
 	export default{
-		data() {
-			
-		},
+		
 		
 		
 	}

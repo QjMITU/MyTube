@@ -1,68 +1,72 @@
 <template>
 	<div style="width: 100%">
-		<!-- 视频预览框 -->
-		<div>
-			<video src="" autoplay></video>
+	
+		<div class="videobox">
+			<div class="fl" style="width: 60%;">
+				
+				<div class="showvideo">
+					123
+				</div>
+				
+				<div class="showcarver">
+					图片
+				</div>
+				
+				
+			</div>
+			<div class="fl" style="width: 40%;">
+				<div class="uploadbox">
+					<el-upload
+					  class="fl"
+					  action=""
+					  :on-preview="handlePreview"
+					  :on-remove="handleRemove"
+					  :before-remove="beforeRemove"
+					  multiple
+					  :limit="1"
+					  :on-exceed="handleExceed"
+					  :file-list="videoFileList">
+					  <el-button size="small" type="primary">上传视频</el-button>
+					  <div slot="tip" class="el-upload__tip">只能上传mp4文件，且不超过700MB</div>
+					</el-upload>
+					
+					
+					<el-upload
+					  class="fr margin-right60"
+					  action=""
+					  :on-preview="handlePreview"
+					  :on-remove="handleRemove"
+					  :before-remove="beforeRemove"
+					  multiple
+					  :limit="1"
+					  :on-exceed="handleExceed"
+					  :file-list="videoFileList">
+					  <el-button size="small" type="primary">上传封面</el-button>
+					  <div slot="tip" class="el-upload__tip">只能上传jpg、png文件，且不超过20MB</div>
+					</el-upload>
+				</div>
+				
+				
+				<div style="width: 95%;margin: 0 auto;">
+					<el-form ref="form" :model="form" label-width="80px" label-position="right">
+						<el-form-item label="作品标题">
+							<el-input></el-input>
+						</el-form-item>
+						
+						
+						
+					</el-form>
+				</div>
+				
+				
+			</div>
+			
+			
 		</div>
-		<!-- 视频上传 -->
-		<el-upload
-		  class="upload-demo"
-		  action="https://jsonplaceholder.typicode.com/posts/"
-		  :on-preview="handlePreview"
-		  :on-remove="handleRemove"
-		  :before-remove="beforeRemove"
-		  multiple
-		  :limit="1"
-		  :on-exceed="handleExceed"
-		  :file-list="videoFileList">
-		  <el-button size="small" type="primary">点击上传</el-button>
-		  <div slot="tip" class="el-upload__tip">只能上传mp4文件，且不超过700MB</div>
-		</el-upload>
-		<!-- 视频封面 -->
-		<el-upload
-		  class="upload-demo"
-		  action="https://jsonplaceholder.typicode.com/posts/"
-		  :on-preview="handlePreview"
-		  :on-remove="handleRemove"
-		  :before-remove="beforeRemove"
-		  multiple
-		  :limit="1"
-		  :on-exceed="handleExceed"
-		  :file-list="imageFileList">
-		  <el-button size="small" type="primary">点击上传</el-button>
-		  <div slot="tip" class="el-upload__tip">只能上传jpg,png文件，且不超过10MB</div>
-		</el-upload>
-		<!-- 视频类型 -->
-		<el-radio v-model="radio" label="1">短视频</el-radio>
-		<el-radio v-model="radio" label="2">视频集</el-radio>
-		<el-input v-model="input" placeholder="请输入作品标题"></el-input>
-		<el-input v-model="input" placeholder="请输入作品描述"></el-input>
 		
 		
-		<el-tag
-		  :key="tag"
-		  v-for="tag in dynamicTags"
-		  closable
-		  :disable-transitions="false"
-		  @close="handleClose(tag)">
-		  {{tag}}
-		</el-tag>
-		<el-input
-		  class="input-new-tag"
-		  v-if="inputVisible"
-		  v-model="inputValue"
-		  ref="saveTagInput"
-		  size="small"
-		  @keyup.enter.native="handleInputConfirm"
-		  @blur="handleInputConfirm"
-		>
-		</el-input>
-		<el-button v-else class="button-new-tag" size="small" @click="showInput">添加</el-button>
-		
-		
-		
-		<div>
-			<button>上传</button>
+		<div class="submit">
+			<button>提交作品</button>
 		</div>
 		
 	</div>
@@ -74,7 +78,9 @@
 		      return {
 				videoFileList: [],
 		        imageFileList: [],
-				radio: '1'
+				form: {
+					
+				}
 		      };
 		    },
 		methods: {
@@ -114,19 +120,38 @@
 </script>
 
 <style>
-	.el-tag + .el-tag {
-	    margin-left: 10px;
-	  }
-	  .button-new-tag {
-	    margin-left: 10px;
-	    height: 32px;
-	    line-height: 30px;
-	    padding-top: 0;
-	    padding-bottom: 0;
-	  }
-	  .input-new-tag {
-	    width: 90px;
-	    margin-left: 10px;
-	    vertical-align: bottom;
-	  }
+	.videobox{
+		width: 100%;
+	}
+	.showvideo{
+		width: 90%;
+		height: 300px;
+		margin: 0 auto;
+		background-color: black;
+	}
+	.showcarver{
+		width: 90%;
+		height: 90px;
+		margin: 0 auto;
+		margin-top: 10px;
+		background-color: aqua;
+	}
+
+	.uploadbox{
+		width: 100%;
+		height: 70px;
+		margin-bottom: 10px;
+		border-bottom: 1px solid #ffff44;
+	}
+
+
+	.margin-right60{
+		margin-right: 60px;
+	}
+	
+	.submit{
+		width: 100px;
+		margin: 0 auto;
+		
+	}
 </style>
