@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <Index></Index>
-	<router-view></router-view>
-	<Floor></Floor>
+	  <router-view></router-view>
+	  <Floor></Floor>
   </div>
 </template>
 
@@ -19,8 +19,8 @@ export default {
 
 <style>
 	*{
-		margin: 0 auto;
-		padding: 0 auto;
+		margin: 0;
+		padding: 0;
 		text-decoration: none;
 		list-style: none;
 	}
