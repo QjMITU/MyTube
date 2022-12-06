@@ -9,9 +9,7 @@
 					<div class="titlev">
 						这是这视频的标题
 					</div>
-		
 			</li>
-			
 		</ul>
 	</div>
 	

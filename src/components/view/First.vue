@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div style="width: 70%; margin: 0 auto;">
+		<div style="width: 90%; margin: 0 auto;">
 			<Box></Box>
 		</div>
 		<span style="height: 50px;display: block;">视频列表</span>
