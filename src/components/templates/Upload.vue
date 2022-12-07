@@ -5,7 +5,7 @@
 			<div style="width: 100%;">
 				<div>视频预览</div>
 				<div class="showvideo">
-					123
+					<video :src="videoUrl" autoplay controls width="100%" height="100%"></video>
 				</div>
 				<div>封面预览</div>
 				<div class="showcarver">
@@ -20,7 +20,9 @@
         <el-upload
             class="fl upload_margin"
             drag
-            action=""
+            :action="uploadUrl"
+            :on-success="uploadVideoSuccess"
+            :headers="headers"
             multiple>
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将视频文件拖到此处，或<em>点击上传</em></div>
@@ -29,7 +31,9 @@
         <el-upload
             class="fr upload_margin"
             drag
-            action=""
+            :action="uploadUrl"
+            :on-success="uploadImageSuccess"
+            :headers="headers"
             multiple>
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将封面文件拖到此处，或<em>点击上传</em></div>
@@ -117,7 +121,8 @@
 
 	export default{
 		 data() {
-        return {
+       let token = 'eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl9rZXkiOiIyZjVhNzAxMGJkMDA0OWFjYTQ0OWQzYzI2NTJkYjNhOCJ9.im3WBGlgmW9_0sSjzP9qy73TFkgJv3tqYSvshoz9WMj95p4jG79gJS7P0EIwVeEMGP0hHqXwNvrYgk-VzqRWEg'
+       return {
           videoform:{
             type: '',
             title: '',
@@ -125,7 +130,13 @@
             records: []
           },
           inputVisible: false,
-          inputValue: ''
+          inputValue: '',
+          uploadUrl: 'http://localhost:8081/common/upload',
+          headers:{
+            'Authorization' : 'Bearer ' + token
+          },
+          images: [],
+          videoUrl: ''
         };
      },
 		methods: {
@@ -149,6 +160,22 @@
         this.inputValue = '';
       },
 
+      uploadVideoSuccess(res){
+        console.log("上传成功")
+        console.log(res.data)
+        this.videoUrl = 'http://localhost:8081/profile'+res.data;
+      },
+
+
+      uploadImageSuccess(res){
+        console.log("上传成功")
+        console.log(res.data)
+
+
+
+      },
+
+
       submit() {
 
 
@@ -167,7 +194,7 @@
 	}
 	.showvideo{
 		width: 100%;
-		height: 300px;
+		height: 350px;
 		background-color: gray;
 	}
 	.showcarver{
