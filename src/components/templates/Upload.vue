@@ -9,7 +9,14 @@
 				</div>
 				<div>封面预览</div>
 				<div class="showcarver">
-					图片
+          <div v-for="(img) in images" class="cover">
+            <el-image
+                style="width: 100%; height: 100%"
+                :src="img"
+                :preview-src-list="images">
+            </el-image>
+          </div>
+
 				</div>
 			</div>
 
@@ -119,9 +126,11 @@
 
 <script>
 
-	export default{
+	import axios from "axios";
+
+  export default{
 		 data() {
-       let token = 'eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl9rZXkiOiIyZjVhNzAxMGJkMDA0OWFjYTQ0OWQzYzI2NTJkYjNhOCJ9.im3WBGlgmW9_0sSjzP9qy73TFkgJv3tqYSvshoz9WMj95p4jG79gJS7P0EIwVeEMGP0hHqXwNvrYgk-VzqRWEg'
+       let token = 'eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl9rZXkiOiJhZGNiZjA5YWMzNWU0MDliOWIyZjNiZjdjZTY3ZjQyMCJ9.GjgmwJI2NZ-0tMLAiuk4Vc8jbFeW_D2qIRkwJBr-5iW3mjdMiu4qJOc5KsFF_P4j8ee5psKZMza_HG8cYA7LBg'
        return {
           videoform:{
             type: '',
@@ -132,6 +141,7 @@
           inputVisible: false,
           inputValue: '',
           uploadUrl: 'http://localhost:8081/common/upload',
+          previewCoverUrl: 'http://localhost:8081/video/preview/cover?url=',
           headers:{
             'Authorization' : 'Bearer ' + token
           },
@@ -163,10 +173,22 @@
       uploadVideoSuccess(res){
         console.log("上传成功")
         console.log(res.data)
-        this.videoUrl = 'http://localhost:8081/profile'+res.data;
+        this.videoUrl = 'http://localhost:8081/profile'+res.data
+        this.previewCoverUrl+=res.data
+        this.getPreviewCover()
       },
-
-
+      getPreviewCover(){
+        axios({
+          url: this.previewCoverUrl,
+          method: 'get',
+          headers: this.headers
+        }).then(res=>{
+          console.log(res)
+          if (res.status == 200) {
+            this.images = res.data.data.map(x=>'http://localhost:8081/profile'+x)
+          }
+        })
+      },
       uploadImageSuccess(res){
         console.log("上传成功")
         console.log(res.data)
@@ -202,7 +224,15 @@
 		height: 90px;
 		margin-top: 10px;
 		background-color: aqua;
+    overflow: hidden;
 	}
+  .cover{
+    width: 100px;
+    height: 90px;
+    border: 1px solid deepskyblue;
+    margin: 0 10px;
+    float: left;
+  }
   .upload_files{
     width: 100%;
     margin-top: 20px;
