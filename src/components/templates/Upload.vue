@@ -9,11 +9,10 @@
 				</div>
 				<div>封面预览</div>
 				<div class="showcarver">
-          <div v-for="(img) in images" class="cover">
+          <div v-for="(img,index) in images" :class="index===coverIndex?cover1:cover" @click="choseCover(index)">
             <el-image
                 style="width: 100%; height: 100%"
-                :src="img"
-                :preview-src-list="images">
+                :src="img">
             </el-image>
           </div>
 
@@ -27,25 +26,32 @@
         <el-upload
             class="fl upload_margin"
             drag
+            :limit="1"
+            accept=".mp4,.flv"
             :action="uploadUrl"
             :on-success="uploadVideoSuccess"
-            :headers="headers"
-            multiple>
+            :on-error="uploadError"
+            :headers="headers">
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将视频文件拖到此处，或<em>点击上传</em></div>
           <div class="el-upload__tip" slot="tip">只能上传mp4文件，且不超过200MB</div>
         </el-upload>
-        <el-upload
-            class="fr upload_margin"
-            drag
-            :action="uploadUrl"
-            :on-success="uploadImageSuccess"
-            :headers="headers"
-            multiple>
-          <i class="el-icon-upload"></i>
-          <div class="el-upload__text">将封面文件拖到此处，或<em>点击上传</em></div>
-          <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-        </el-upload>
+        <div>
+          <el-upload
+              class="fr upload_margin"
+              drag
+              :limit="1"
+              :action="uploadUrl"
+              :on-success="uploadImageSuccess"
+              :on-error="uploadError"
+              :headers="headers"
+              accept=".jpg,.png">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将封面文件拖到此处，或<em>点击上传</em></div>
+            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
+        </div>
+
       </div>
 
       <div class="upload_info">
@@ -130,7 +136,7 @@
 
   export default{
 		 data() {
-       let token = 'eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl9rZXkiOiJhZGNiZjA5YWMzNWU0MDliOWIyZjNiZjdjZTY3ZjQyMCJ9.GjgmwJI2NZ-0tMLAiuk4Vc8jbFeW_D2qIRkwJBr-5iW3mjdMiu4qJOc5KsFF_P4j8ee5psKZMza_HG8cYA7LBg'
+       let token = 'eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl9rZXkiOiI1NDM2ZTdhMGQwOTk0YzkxYjk5YmExZjQ1ZDk0ZmJjZiJ9.gu89kRKGRThuSXmq5lgPUHGH3TkwB-QZWspDkOy0OJGVid_oQkQQhW4dY8cPryU0yUjMyOwGnem7Iq1TRdBj5w'
        return {
           videoform:{
             type: '',
@@ -146,7 +152,8 @@
             'Authorization' : 'Bearer ' + token
           },
           images: [],
-          videoUrl: ''
+          videoUrl: '',
+          coverIndex: 0
         };
      },
 		methods: {
@@ -169,7 +176,6 @@
         this.inputVisible = false;
         this.inputValue = '';
       },
-
       uploadVideoSuccess(res){
         console.log("上传成功")
         console.log(res.data)
@@ -192,12 +198,15 @@
       uploadImageSuccess(res){
         console.log("上传成功")
         console.log(res.data)
-
-
-
       },
-
-
+      uploadError(res){
+        console.log("失败")
+        console.log(res.status)
+      },
+      choseCover(index){
+        console.log(index)
+        this.coverIndex = index
+      },
       submit() {
 
 
@@ -227,11 +236,23 @@
     overflow: hidden;
 	}
   .cover{
-    width: 100px;
-    height: 90px;
+    width: 120px;
+    height: 70px;
     border: 1px solid deepskyblue;
     margin: 0 10px;
     float: left;
+  }
+  .cover1{
+    width: 120px;
+    height: 70px;
+    border: 1px solid deepskyblue;
+    margin: 0 10px;
+    float: left;
+    border: 2px solid red;
+  }
+  .cover:hover{
+    cursor: pointer;
+    border: 2px solid red;
   }
   .upload_files{
     width: 100%;
