@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>直播</title>
+</head>
+<body>
+    <div>
+        <video id="video" width="800px" height="500px" controls></video>
+    </div>
+
+
+
+    <button onclick="openMedia()">播放</button>
+    <button onclick="closeMedia()">close</button>
+
+    <button onclick="connectWs()">连接ws</button>
+    <button onclick="closeWs()">断开ws</button>
+<script>
+
+    var ws = new WebSocket('ws://10.0.173.153:8800/hello')
+    ws.onopen = ()=>{
+        console.log("连接成功")
+    }
+    ws.onmessage=meg=>{
+        console.log(meg)
+    }
+
+
+
+    var mediaStream=new MediaStream()
+    function openMedia(){
+        const video = document.getElementById("video")
+        navigator.mediaDevices.getUserMedia({
+            video:true,
+            audio:true
+        }).then(s=>{
+            mediaStream = s
+            video.srcObject=s
+            video.play()
+            let mediaRe = new MediaRecorder(s,{mimeType:"video/webm"})
+
+            console.log(mediaRe.mimeType)
+            mediaRe.ondataavailable=function (blob){
+                console.log(blob.data)
+                let binary = []
+                binary.push(blob.data)
+                var url = window.URL.createObjectURL(new Blob(binary))
+                var link = document.createElement('a')
+
+                link.href = url
+                link.setAttribute('download',"a.webm")
+                link.click()
+                mediaRe.stop()
+            }
+            mediaRe.start(5000)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    function closeMedia(){
+        mediaStream.getTracks().forEach(track=>{
+            track.stop()
+        })
+    }
+
+    function connectWs(){
+
+    }
+
+</script>
+
+</body>
+</html>

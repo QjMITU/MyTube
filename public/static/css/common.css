@@ -1,0 +1,75 @@
+/*全局标签样式*/
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color: white;
+}
+img{
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+/*公共类样式*/
+.active_class{
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: lightskyblue;
+}
+.nav_font{
+	font-size: 15px;
+	color: white;
+}
+.base_container{
+	width: 100%;
+	height: 100%;
+}
+.form_title_box{
+	width: 35%;
+	text-align: center;
+	height: 80px;
+	line-height: 80px;
+	margin: 0 auto;
+	color: white;
+	font-weight: bold;
+}
+.common_box{
+	width: 100%;
+}
+.comment_avatar_root{
+	width: 60px;
+	height: 60px;
+	margin-right: 20px;
+	text-align: center;
+	line-height: 60px;
+}
+.comment_avatar_small{
+	width: 30px;
+	height: 30px;
+	margin-right: 15px;
+	text-align: center;
+	line-height: 30px;
+}
+/*间距样式*/
+.margin_left10{
+	margin-left: 10px;
+}
+.margin_left300{
+	margin-left: 300px;
+}
+.margin_right20{
+	margin-right: 20px;
+}
+/*浮动*/
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+/*边框*/
+.right_border{
+	border-right: 1px solid #f2f2f2;
+}

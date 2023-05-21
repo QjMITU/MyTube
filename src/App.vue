@@ -1,19 +1,13 @@
 <template>
   <div id="app">
-    <Index></Index>
-	  <router-view></router-view>
-	  <Floor></Floor>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Index from './components/Index.vue'
-import Floor from './components/Floor.vue'
 export default {
   name: 'App',
-  components: {
-	Index,Floor
-  }
+
 }
 </script>
 
@@ -29,5 +23,6 @@ export default {
 	}
 	#app{
 		width: 100%;
+    min-height: 100vh;
 	}
 </style>
